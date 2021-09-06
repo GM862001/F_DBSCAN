@@ -45,8 +45,8 @@ for port in range(start_port, start_port + N_clients):
 	data_json = json.loads(response.read())
 	result = np.array(data_json['results'])
 	# if len(result) == 0:
-		# if port == start_port:
-		#	start_port_client_off = True
+	# 	if port == start_port:
+	#		start_port_client_off = True
 	#	continue
 	if port == start_port: # if port == start_port or (start_port_client_off and port == start_port + 1):
 		joined_result = result
