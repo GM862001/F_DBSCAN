@@ -38,14 +38,17 @@ start_port = 5000
 N_clients = 10
 url = f'http://localhost:8080/?action=start'
 urlopen(url)
+# start_port_client_off = False # Missing client simulation
 for port in range(start_port, start_port + N_clients):
 	url = f'http://localhost:{port}/?action=results'
 	response = urlopen(url)
 	data_json = json.loads(response.read())
 	result = np.array(data_json['results'])
-	if len(result) == 0:
-		continue
-	if port == start_port:
+	# if len(result) == 0:
+		# if port == start_port:
+		#	start_port_client_off = True
+	#	continue
+	if port == start_port: # if port == start_port or (start_port_client_off and port == start_port + 1):
 		joined_result = result
 	else:
 		joined_result = np.concatenate((joined_result, result))
