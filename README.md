@@ -12,16 +12,16 @@ To run the project, follows these steps:
 * In the main directory, run the command `pipenv install`, to install the project virtual environment;
 * Run the command `pipenv shell` to start a shell in the project virtual environment;
 ##### Horizontal ederated DBSCAN
-* Enter the sub-project directory `HF_DBSCAN`;
+* Enter the sub-project directory `HF_DBSCAN/`;
 * Start the server with the command `python main_server.py`. This command will run the server on _localhost:8080_;
 * Start the clients with the command `python main_client.py`. This command will run ten clients on _localhost:5000-5009_;
 * To start the simulation, connect to _localhost:8080/?action=start_;
 * Finally, to check the results of a given client (be it _localhost:5000_), connect to  _localhost:5000/?action=results_.
 Note that the script `results/HF_results.py` can be used to automatically start the simulation and retrieve the results. To run the script, first enter the directory `results`, and then run the command `python HF_results.py`. The results will then be scattered and saved as `.png` files in one of the subdirectories of `results.py`, depending on the dataset analyzed.
 ##### Vertical ederated DBSCAN
-* Enter the sub-project directory `VF_DBSCAN`;
+* Enter the sub-project directory `VF_DBSCAN/`;
 * Start the server with the command `python main_server.py`. This command will run the server on _localhost:8080_.
 * Start the clients with the command `python main_client.py`. This command will run two clients on _localhost:5000-5001_.
 * To start the simulation, connect to _localhost:8080/?action=start_.
 * Finally, to check the results of a given client (be it _localhost:5000_), connect to  _localhost:5000/?action=results_.
-Note that the script `results/VF_results.py` can be used to automatically start the simulation and retrieve the results. To run the script, first enter the directory `results`, and then run the command `python VF_results.py`. The results will then be scattered and saved as `.png` files in one of the subdirectories of `results.py`, depending on the dataset analyzed.
+Note that the script `results/VF_results.py` can be used to automatically start the simulation and retrieve the results. To run the script, first enter the directory `results/`, and then run the command `python VF_results.py`. The results will then be scattered and saved as `.png` files in one of the subdirectories of `results.py`, depending on the dataset analyzed.
