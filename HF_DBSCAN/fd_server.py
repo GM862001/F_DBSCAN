@@ -9,7 +9,7 @@ from fd_dbscan import FDBSCAN_Server
 def training(clients: List, server: FDBSCAN_Server):
 
     data = {'action': 'compute_local_update'}
-    clients.pop(0) # Missing client simulation
+    # clients.pop(0) # Missing client simulation
     local_updates, failures = process_http_posts(clients, data)
     contribution_map = {}
     for i in range(len(local_updates)):
