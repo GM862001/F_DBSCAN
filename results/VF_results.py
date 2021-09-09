@@ -9,7 +9,7 @@ import json
 from plot import plot2D
 import metrics as mtr
 
-results_folder = '3MC'
+results_folder = 'banana'
 # results_folder = 'aggregation'
 
 dataset_dir = '../datasets'
