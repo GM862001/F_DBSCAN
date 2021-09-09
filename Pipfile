@@ -14,6 +14,7 @@ scipy = "*"
 sklearn = "*"
 matplotlib = "*"
 bcubed = "*"
+numba = "*"
 
 [dev-packages]
 

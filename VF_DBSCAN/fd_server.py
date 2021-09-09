@@ -8,8 +8,9 @@ from fd_dbscan import FDBSCAN_Server
 
 def training(clients: List, server: FDBSCAN_Server):
     data = {'action': 'compute_neighborhood_matrix', 'epsilon': server.get_epsilon()}
+    print('start compute_neighborhood_matrix')
     results, failures = process_http_posts(clients, data)
-
+    print('end compute_neighborhood_matrix')
     N = len(results[0]['matrix'])
     global_matrix = np.zeros((N, N))
     for i in range(len(results)):

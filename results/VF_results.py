@@ -13,7 +13,7 @@ results_folder = '3MC'
 # results_folder = 'aggregation'
 
 dataset_dir = '../datasets'
-dataset_file = '3MC.arff'
+dataset_file = 'banana.arff'
 # dataset_file = 'aggregation.arff'
 dataset_path = f'{dataset_dir}/{dataset_file}'
 dataset = arff.loadarff(dataset_path)

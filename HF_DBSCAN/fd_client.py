@@ -23,8 +23,8 @@ def run_client(client_id: str, server_url: str, host: str, port: int, dataset: L
         def get(self):
             action = request.args.get('action')
             if (action == 'results'):
-                labels, true_labels = client.get_labels();
-                return {'passive': client.is_passive(), 'dataset': client.get_dataset().tolist(), 'labels': labels, 'true_labels': true_labels.tolist()}
+                labels, true_labels, points = client.get_labels();
+                return {'passive': client.is_passive(), 'dataset': client.get_dataset().tolist(), 'labels': labels, 'true_labels': true_labels.tolist(), 'points': points}
             else:
                 return {'message': 'Hello World from Client', 'client_id': client_id}
 

@@ -16,7 +16,7 @@ def generate_dataset_chunks(X: np.array, num_clients: int):
 
 def prepare_dataset(num_clients: int):
     dataset_dir = '../datasets'
-    dataset_file = '3MC.arff'
+    dataset_file = 'banana.arff'
     # dataset_file = 'aggregation.arff'
     dataset_path = f'{dataset_dir}/{dataset_file}'
     dataset = arff.loadarff(dataset_path)

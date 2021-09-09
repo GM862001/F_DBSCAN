@@ -1,6 +1,12 @@
 import numpy as np
 from typing import List, Dict
 from scipy.spatial import distance
+from numba import jit
+import time
+
+@jit(nopython=True)
+def numba_euclidean_distance(u:np.ndarray, v:np.ndarray):
+    return np.linalg.norm(u - v)
 
 class FDBSCAN_Client():
 
@@ -19,13 +25,16 @@ class FDBSCAN_Client():
         return points
 
     def compute_neighborhood_matrix(self, epsilon: float):
-        points = self.__get_points()
+        points = np.array(self.__get_points())
         n_points = len(points)
         matrix = [[0] * n_points for i in range(n_points)]
+        start = time.time()
         for i in range(n_points):
             for j in range(n_points):
-                if (distance.euclidean(points[i], points[j]) < epsilon):
+                if (numba_euclidean_distance(points[i], points[j]) < epsilon):
                     matrix[i][j] = 1
+        end = time.time()
+        print(f'compute_neighborhood_matrix {end - start}')
         return matrix
 
     def update_labels(self, labels: List):

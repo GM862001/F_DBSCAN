@@ -32,7 +32,7 @@ class FDBSCAN_Client():
         return self.__dataset
 
     def get_labels(self):
-        return self.__labels, self.__true_labels
+        return self.__labels, self.__true_labels, self.__get_points()
 
     def is_passive(self):
         return self.__passive
@@ -98,48 +98,31 @@ class FDBSCAN_Client():
 
         points = self.__get_points()
 
-        dense_cells = [tuple(row) for row in cells]
-        self.__labels = [-1] * len(points)
-        
-        cell_points_dic = {}
-        for actual_point in points:
-            actual_cell = tuple(math.floor(actual_point[i] / self.__L) for i in range(len(actual_point)))
-            try:
-                cell_points_dic[actual_cell].append(actual_point)
-            except: 
-                cell_points_dic[actual_cell] = [actual_point]
+        dense_cells = []
+        for row in cells:
+            dense_cells.append(tuple(row))
 
-        cells = list(cell_points_dic.keys())
-                        
-        dense_cells_index = dense_cells.index
-        points_index = points.index
-        for cell in cells:
-            current_cell_points = cell_points_dic[cell]
-            if (cell in dense_cells):
-                cluster = labels[dense_cells_index(cell)]
-                self.__assign_labels_to_points(points_index, current_cell_points, cluster)
+        while len(points) > 0:
+            actual_point = points.pop(0)
+            actual_cell = tuple(math.floor(actual_point[i] / self.__L) for i in range(len(actual_point)))
+            outlier = True
+            if actual_cell in dense_cells:
+                self.__labels.append(labels[dense_cells.index(actual_cell)])
             else:
-                nearest_adjacent_cell = self.__locate_nearest_adjacent_cell(cell, dense_cells, current_cell_points)                            
-                if (nearest_adjacent_cell is not None):
-                    cluster = labels[dense_cells_index(nearest_adjacent_cell)]
-                    self.__assign_labels_to_points(points_index, current_cell_points, cluster)
-        
-    def __locate_nearest_adjacent_cell(self, cell: Tuple, dense_cells: List, current_cell_points: List):
-        adjacent_cells = get_all_neighbors(cell)
-        selected_adjacent_cell = None
-        min_dist = float('inf')
-        for adjacent_cell in adjacent_cells:
-            if (adjacent_cell in dense_cells):
-                adjacent_cell_mid_point = tuple(cell_coord * self.__L + self.__L/2 for cell_coord in adjacent_cell)
-                current_min_dist = min([distance.euclidean(adjacent_cell_mid_point, cell_point) for cell_point in current_cell_points])
-                if (current_min_dist < min_dist):
-                    selected_adjacent_cell = adjacent_cell
-        return selected_adjacent_cell
-        
-    def __assign_labels_to_points(self, points_index: Callable, cell_points: List, cluster: int):
-        labels = self.__labels
-        for point in cell_points:
-            labels[points_index(point)] = cluster
+                min_dist = float('inf')
+                cluster_to_assign = -1
+                check_list = get_all_neighbors(actual_cell)
+                for check_cell in check_list:
+                    if check_cell in dense_cells:
+                        cell_mid_point = tuple(cell_coord * self.__L + self.__L/2 for cell_coord in check_cell)
+                        actual_dist = distance.euclidean(actual_point, cell_mid_point)
+                        if actual_dist < min_dist:
+                            min_dist = actual_dist
+                            cluster_to_assign = labels[dense_cells.index(check_cell)]
+                        outlier = False
+                self.__labels.append(cluster_to_assign)
+
+        self.__training_completed = True
 
 class FDBSCAN_Server():
 
