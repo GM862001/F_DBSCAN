@@ -3,7 +3,7 @@
 ### About
 This is the project my Bachelor Thesis in Computer Engineering was about (3 CFU/ECTS).  
 The project consists of the implementation of a horizontal and a vertical federated versions of DBSCAN.  
-The project is introduced in the file `Presentazione.pdf` and fully described in the file `Federated DBSCAN.pdf`.  
+The project is introduced in the file `Presentazione.pdf` (written in Italian) and fully described in the file `Federated DBSCAN.pdf`.  
 #### How to Run the Project
 To run the project, follows these steps:
 * If you do not have pipenv package installed, install it with the command `pip install pipenv`;
