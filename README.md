@@ -1,7 +1,7 @@
 # F_DBSCAN
 ## Horizontal and Vertical Federated Versions of DBSCAN
 ### About
-This my Bachelor Thesis project (3 CFU).  
+This my Bachelor Thesis project.  
 The project consists of the implementation of a horizontal and a vertical federated versions of DBSCAN.  
 The project is introduced in the file `Presentazione.pdf` (written in Italian) and fully described in the file `Federated DBSCAN.pdf`.  
 #### How to Run the Project
