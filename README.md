@@ -1,5 +1,5 @@
 # F_DBSCAN
-## Horizontal and Vertical Federated Versions of DBSCAN
+## Implementation and Analysis of Horizontal and Vertical Federated Versions of DBSCAN
 ### About
 This my Bachelor Thesis project.  
 The project consists of the implementation of a horizontal and a vertical federated versions of DBSCAN.  
